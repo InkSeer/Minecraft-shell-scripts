@@ -1,16 +1,17 @@
 #!/bin/bash
 
+# To make automated use a scheduler
 discord_webhook="your webhook link"
 
 if ! screen -list | grep -q "mc"; then
-	# notifi players of restart
+	# Notifi players of restart
 	screen -r mc_console -X stuff 'say Server is restarting in 1 min (backup)'`echo -ne '\015'`
 	sleep 1m
 
 	screen -r mc_console -X stuff 'say Server is restarting'`echo -ne '\015'`
 	sleep 5s
 
-	# shutting down server
+	# Shutting down server
 	screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
 	curl -H "Content-Type: application/json" -d '{"username": "Server", "content": "Server is restating (backup)"}' $discord_webhook
 	sleep 10s
@@ -18,16 +19,16 @@ if ! screen -list | grep -q "mc"; then
 	# Check if server down
 	if ! screen -list | grep -q "mc"; then
 		# Server off
-		# variables for backup
-		version=$(whoami)                    # who created backup and/or version of minecraft
-		name="world_server"                  # name of world to backup
-		backuppath="/minecraft/backup"       # path for backup
-		time=$(date +%F_%H-%M-%S)            # date of backup, will be backup file name
+		# Variables for backup
+		version=$(whoami)                    # Who created backup and/or version of minecraft
+		name="world_server"                  # Name of world to backup
+		backuppath="/minecraft/backup"       # Path for backup
+		time=$(date +%F_%H-%M-%S)            # Date of backup, will be backup file name
 
-		# create backup dir
+		# Create backup dir
 		mkdir -p "${backuppath}/${time}"
 	
-		# check if backup dir exists
+		# Check if backup dir exists
 		if [[ "${backuppath}/${time}" != "" ]]; then
 			# create backup 
 			cp -r "${name}" "${backuppath}/${time}/${name}"
@@ -42,9 +43,9 @@ if ! screen -list | grep -q "mc"; then
 	
 		sleep 1s
 	
-		# check if backup exists
+		# Check if backup exists
 		if [[  -f "${backuppath}/${time}/${version}" ]]; then
-			# start server
+			# Start server
 			sh ./run.sh
 			echo "Server is on and backup complete"
 			exit 0
@@ -59,7 +60,7 @@ if ! screen -list | grep -q "mc"; then
 		exit 0
 	fi
 else 
-	# server was off (error)
+	# Server was off (error)
  	echo "Server was off"
  	exit 0
 fi
