@@ -1,5 +1,7 @@
 #!/bin/bash
 
+discord_webhook="your webhook link"
+
 if ! screen -list | grep -q "mc"; then
 	# notifi players of restart
 	screen -r mc_console -X stuff 'say Server is restarting in 1 min (backup)'`echo -ne '\015'`
@@ -9,7 +11,8 @@ if ! screen -list | grep -q "mc"; then
 	sleep 5s
 
 	# shutting down server
-	sh ./stop.sh
+	screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
+	curl -H "Content-Type: application/json" -d '{"username": "Server", "content": "Server is restating (backup)"}' $discord_webhook
 	sleep 10s
 
 	# Check if server down
