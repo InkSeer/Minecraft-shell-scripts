@@ -16,10 +16,10 @@ if ! screen -list | grep -q "mc"; then
 	if ! screen -list | grep -q "mc"; then
 		# Server off
 		# variables for backup
-		version=$(whoami) # who created backup
-		name="world_server" # name of world to backup
-		backuppath="/minecraft/backup"
-		time=$(date +%F_%H-%M-%S)
+		version=$(whoami)                    # who created backup and/or version of minecraft
+		name="world_server"                  # name of world to backup
+		backuppath="/minecraft/backup"       # path for backup
+		time=$(date +%F_%H-%M-%S)            # date of backup, will be backup file name
 
 		# create backup dir
 		mkdir -p "${backuppath}/${time}"
@@ -32,7 +32,7 @@ if ! screen -list | grep -q "mc"; then
 			# create version file
 			echo "info" > "${backuppath}/${time}/${version}"
 		else
-			# backup dir error
+			# backup dir (error)
 			echo "Backup dir non-existent"
 			exit 0
 		fi
@@ -46,15 +46,17 @@ if ! screen -list | grep -q "mc"; then
 			echo "Server is on and backup complete"
 			exit 0
 		else
-			# Server off, backup error
+			# Server off, backup not saved (error)
 			echo "Server fail to start, world not saved"
 			exit 0
 		fi
 	else
-		# Server not off error
+		# Server was not off (error)
 		echo "Server is still on"
 		exit 0
 	fi
 else 
-	exit 0
+	# server was off (error)
+ 	echo "Server was off"
+ 	exit 0
 fi
