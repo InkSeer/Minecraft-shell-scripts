@@ -13,7 +13,7 @@ if ! screen -list | grep -q "mc"; then
 
 	# Shutting down server
 	screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
-	curl -H "Content-Type: application/json" -d '{"username": "Server", "content": "Server is restating (backup)"}' $discord_webhook
+	curl -H "Content-Type: application/json" -d '{"content": "Server is restarting (backup)"}' $discord_webhook
 	sleep 10s
 
 	# Check if server down
