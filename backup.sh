@@ -47,8 +47,15 @@ if ! screen -list | grep -q "mc"; then
 		if [[  -f "${backuppath}/${time}/${version}" ]]; then
 			# Start server
 			sh ./run.sh
-			echo "Server is on and backup complete"
-			exit 0
+
+   			# Check if server start
+   			if ! screen -list | grep -q "mc"; then
+			       	echo "Server is off and backup complete"
+				exit 0
+    			else
+       				echo "Server is on and backup complete"
+				exit 0
+      			fi
 		else
 			# Server off, backup not saved (error)
 			echo "Server fail to start, world not saved"
