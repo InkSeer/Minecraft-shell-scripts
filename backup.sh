@@ -3,11 +3,12 @@
 # To make automated use a scheduler
 discord_webhook="your webhook link"
 
-if ! screen -list | grep -q "mc"; then
+# Check if server is on
+if screen -list | grep -q "mc"; then
+	# Server is on
 	# Notifi players of restart
 	screen -r mc_console -X stuff 'say Server is restarting in 1 min (backup)'`echo -ne '\015'`
 	sleep 1m
-
 	screen -r mc_console -X stuff 'say Server is restarting'`echo -ne '\015'`
 	sleep 5s
 
@@ -46,10 +47,10 @@ if ! screen -list | grep -q "mc"; then
 		# Check if backup exists
 		if [[  -f "${backuppath}/${time}/${version}" ]]; then
 			# Start server
-			sh ./run.sh
+			source "$(pwd)/run.sh"
 
    			# Check if server start
-   			if ! screen -list | grep -q "mc"; then
+   			if screen -list | grep -q "mc"; then
 			       	echo "Server is on and backup complete"
 				exit 0
     			else
