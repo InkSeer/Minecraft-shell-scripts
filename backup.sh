@@ -50,10 +50,10 @@ if ! screen -list | grep -q "mc"; then
 
    			# Check if server start
    			if ! screen -list | grep -q "mc"; then
-			       	echo "Server is off and backup complete"
+			       	echo "Server is on and backup complete"
 				exit 0
     			else
-       				echo "Server is on and backup complete"
+       				echo "Server is off and backup complete"
 				exit 0
       			fi
 		else
