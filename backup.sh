@@ -38,9 +38,9 @@ if screen -list | grep -q "mc"; then
 			# create version file
 			echo "info" > "${backuppath}/${time}/${version}"
 		else
-			# backup dir (error)
+			# backup dir (error 125)
 			echo "Backup dir non-existent"
-  			curl -H "Content-Type: application/json" -d '{"content": "Error 104: Backup directory for backup does not exist"}' $discord_webhook_error
+  			curl -H "Content-Type: application/json" -d '{"content": "Error 125: Backup directory for backup does not exist."}' $discord_webhook_error
 			exit 0
 		fi
 	
@@ -57,25 +57,26 @@ if screen -list | grep -q "mc"; then
 			       	echo "Server is on and backup complete"
 				exit 0
     			else
-       				# Completed backup with failed server start
+       				# Completed backup with failed server start (error 124)
 	   			echo "Server is off and backup complete"
-	   			curl -H "Content-Type: application/json" -d '{"content": "Error 103: Server failed to start after backup was completed"}' $discord_webhook_error
+	   			curl -H "Content-Type: application/json" -d '{"content": "Error 124: Server failed to start after backup was completed."}' $discord_webhook_error
 				exit 0
       			fi
 		else
-			# Server off, backup not saved (error)
+			# Server off, backup not saved (error 123)
 			echo "Server fail to start, world not saved"
+  			curl -H "Content-Type: application/json" -d '{"content": "Error 123: Backup was not completed and server has not started."}' $discord_webhook_error
 			exit 0
 		fi
 	else
-		# Server was not off (error)
-  		curl -H "Content-Type: application/json" -d '{"content": "Error 102: Server failed to shut down for backup"}' $discord_webhook_error
+		# Server was not off (error 122)
 		echo "Server is still on"
-		exit 0
+  		curl -H "Content-Type: application/json" -d '{"content": "Error 122: Server failed to shut down for backup."}' $discord_webhook_error
+  		exit 0
 	fi
 else 
-	# Server was off (error)
+	# Server was off (error 121)
  	echo "Server was off"
-  	curl -H "Content-Type: application/json" -d '{"content": "Error 101: Server was of when trying to backup"}' $discord_webhook_error
+  	curl -H "Content-Type: application/json" -d '{"content": "Error 121: Server was of when trying to backup."}' $discord_webhook_error
  	exit 0
 fi
