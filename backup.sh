@@ -40,7 +40,7 @@ if screen -list | grep -q "mc"; then
 		else
 			# backup dir (error 125)
 			echo "Backup dir non-existent"
-  			curl -H "Content-Type: application/json" -d '{"content": "Error 125: Backup directory for backup does not exist."}' $discord_webhook_error
+  			curl -H "Content-Type: application/json" -d '{"content": "Error 125: Backup directory for the backup does not exist."}' $discord_webhook_error
 			exit 0
 		fi
 	
@@ -71,12 +71,12 @@ if screen -list | grep -q "mc"; then
 	else
 		# Server was not off (error 122)
 		echo "Server is still on"
-  		curl -H "Content-Type: application/json" -d '{"content": "Error 122: Server failed to shut down for backup."}' $discord_webhook_error
+  		curl -H "Content-Type: application/json" -d '{"content": "Error 122: Server failed to shut down for the backup."}' $discord_webhook_error
   		exit 0
 	fi
 else 
 	# Server was off (error 121)
  	echo "Server was off"
-  	curl -H "Content-Type: application/json" -d '{"content": "Error 121: Server was of when trying to backup."}' $discord_webhook_error
+  	curl -H "Content-Type: application/json" -d '{"content": "Error 121: Server was of when trying to create thebackup."}' $discord_webhook_error
  	exit 0
 fi
