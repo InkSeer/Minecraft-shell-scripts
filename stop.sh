@@ -12,6 +12,6 @@ if ! screen -list | grep -q "mc"; then
         exit 0
 else
         # Server failed to stop
-        curl -H "Content-Type: application/json" -d '{"content": "Error 102: Server failed to start"}' $discord_webhook_error
+        curl -H "Content-Type: application/json" -d '{"content": "Error 102: Server failed to start."}' $discord_webhook_error
         exit 0
 fi
