@@ -5,13 +5,14 @@ Some simple shell scripts made to automate a beta minecraft server on linux.
 
 ## Errors
 Some errors to know if code fail at some point.
-### run.sh & stop.sh
+### From run.sh, stop.sh & check_status.sh
 ```
-101: Server failed to start
-102: Server Failed to stop
+101: Server failed to start.
+102: Server Failed to stop.
+103: Server is not running.
 ```
 
-### backup.sh
+### From backup.sh
 ```
 121: Server was of when trying to create the backup. 
 122: Server failed to shut down for the backup.
