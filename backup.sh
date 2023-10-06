@@ -31,7 +31,7 @@ if screen -list | grep -q "mc_console"; then
 		mkdir -p "${backuppath}/${time}"
 	
 		# Check if backup dir exists
-		if [[ "${backuppath}/${time}" != "" ]]; then
+		if [[ -d "${backuppath}/${time}" ]]; then
 			# create backup 
 			cp -r "${name}" "${backuppath}/${time}/${name}"
 
