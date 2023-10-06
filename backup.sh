@@ -8,13 +8,13 @@ discord_webhook_error="your webhook link"
 if screen -list | grep -q "mc_console"; then
 	# Server is on
 	# Notifi players of restart
-	screen -r mc_console -X stuff 'say Server is restarting in 1 min (backup)'`echo -ne '\015'`
+	screen -r mc_console -X stuff "say Server is restarting in 1 min (backup)^M"
 	sleep 1m
-	screen -r mc_console -X stuff 'say Server is restarting'`echo -ne '\015'`
+	screen -r mc_console -X stuff "say Server is restarting^M"
 	sleep 5s
 
 	# Shutting down server
-	screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
+	screen -S mc_console -X stuff "stop^M"
 	curl -H "Content-Type: application/json" -d '{"embeds": [{"title": "Server is restatring (backup)","color": 11184810}]}' $discord_webhook
 	sleep 10s
 
