@@ -6,7 +6,7 @@ screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
 discord_webhook="your webhook link"
 discord_webhook_error="your webhook link"
 
-if ! screen -list | grep -q "mc"; then
+if ! screen -list | grep -q "mc_console"; then
         # Server has stopped
         curl -H "Content-Type: application/json" -d '{"embeds": [{"title": "Server is off","color": 16733525}]}' $discord_webhook
         exit 0
