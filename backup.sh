@@ -49,8 +49,10 @@ if screen -list | grep -q "mc_console"; then
 		# Check if backup exists
 		if [ -f "${backuppath}/${time}/${version}" ]; then
 			# Start server
-			source "$(pwd)/run.sh"
+			bash "$(pwd)/run.sh"
 
+			sleep 5s
+   
    			# Check if server start
    			if screen -list | grep -q "mc_console"; then
       				# Completed backup with succesful server start
