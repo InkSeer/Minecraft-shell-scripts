@@ -31,7 +31,7 @@ if screen -list | grep -q "mc_console"; then
 		mkdir -p "${backuppath}/${time}"
 	
 		# Check if backup dir exists
-		if [[ -d "${backuppath}/${time}" ]]; then
+		if [ -d "${backuppath}/${time}" ]; then
 			# create backup 
 			cp -r "${name}" "${backuppath}/${time}/${name}"
 
@@ -47,7 +47,7 @@ if screen -list | grep -q "mc_console"; then
 		sleep 1s
 	
 		# Check if backup exists
-		if [[  -f "${backuppath}/${time}/${version}" ]]; then
+		if [ -f "${backuppath}/${time}/${version}" ]; then
 			# Start server
 			source "$(pwd)/run.sh"
 
