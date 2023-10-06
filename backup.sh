@@ -5,7 +5,7 @@ discord_webhook="your webhook link"
 discord_webhook_error="your webhook link"
 
 # Check if server is on
-if screen -list | grep -q "mc"; then
+if screen -list | grep -q "mc_console"; then
 	# Server is on
 	# Notifi players of restart
 	screen -r mc_console -X stuff 'say Server is restarting in 1 min (backup)'`echo -ne '\015'`
@@ -19,7 +19,7 @@ if screen -list | grep -q "mc"; then
 	sleep 10s
 
 	# Check if server is down
-	if ! screen -list | grep -q "mc"; then
+	if ! screen -list | grep -q "mc_console"; then
 		# Server off
 		# Variables for backup
 		version=$(whoami)                    # Who created backup and/or version of minecraft
@@ -52,7 +52,7 @@ if screen -list | grep -q "mc"; then
 			source "$(pwd)/run.sh"
 
    			# Check if server start
-   			if screen -list | grep -q "mc"; then
+   			if screen -list | grep -q "mc_console"; then
       				# Completed backup with succesful server start
 			       	echo "Server is on and backup complete"
 				exit 0
