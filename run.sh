@@ -6,7 +6,7 @@ screen -dmS mc_console java -Xmx2048M -Xms2048M -jar minecraft_server.jar nogui
 discord_webhook="your webhook link"
 discord_webhook_error="your webhook link"
 
-if screen -list | grep -q "mc"; then
+if screen -list | grep -q "mc_console"; then
         # Server has started
         curl -H "Content-Type: application/json" -d '{"embeds": [{"title": "Server is on","color": 5635925}]}' $discord_webhook
         exit 0
