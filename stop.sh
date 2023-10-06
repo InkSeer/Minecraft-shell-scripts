@@ -1,6 +1,6 @@
 #!/bin/bash
 
-screen -S mc_console -X stuff 'stop'`echo -ne'\015'`
+screen -S mc_console -X stuff "stop^M"
 
 # Only if you want server status in discord (can be removed)
 discord_webhook="your webhook link"
