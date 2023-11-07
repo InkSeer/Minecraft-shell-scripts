@@ -15,7 +15,7 @@ if screen -list | grep -q "mc_console"; then
 
 	# Shutting down server
 	screen -S mc_console -X stuff "stop^M"
-	curl -H "Content-Type: application/json" -d '{"embeds": [{"title": "Server is restatring (backup)","color": 11184810}]}' $discord_webhook
+	curl -H "Content-Type: application/json" -d '{"embeds": [{"title": "Server is restarting (backup)","color": 11184810}]}' $discord_webhook
 	sleep 10s
 
 	# Check if server is down
@@ -79,6 +79,6 @@ if screen -list | grep -q "mc_console"; then
 else 
 	# Server was off (error 121)
  	echo "Server was off"
-  	curl -H "Content-Type: application/json" -d '{"content": "Error 121: Server was of when trying to create thebackup."}' $discord_webhook_error
+  	curl -H "Content-Type: application/json" -d '{"content": "Error 121: Server was of when trying to create the backup."}' $discord_webhook_error
  	exit 0
 fi
